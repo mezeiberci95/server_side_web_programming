@@ -36,4 +36,16 @@ class PostController extends Controller
     public function show($id) {
         return view('post', ['id' => $id]); //ezt a viewt létre kell hozni, megkapja az id változót
     }
+
+    public function showNewPost() {
+        return view('new-post');
+    }
+
+    public function storeNewPost(Request $request) {
+        $data = $request->validate([
+            'title' => 'required|min:3',
+            'text' => 'required|min:12',
+        ]);
+        return redirect()->route('posts')->with('post_added', true);
+    }
 }

@@ -5,6 +5,16 @@
 @section('content')
     Minden bejegyzes
     <div class="container">
+
+        @if (session()->has('post_added'))
+            @if (session()->get('post_added') == true)
+                <div class="alert alert-success mb-3" role="alert">
+                    Sikeresen hozzáadtál egy bejegyzéést!
+                </div>
+            @endif
+        @endif
+
+
         <div class="row">
             @forelse ($posts as $post)
         <div class="col-12 col-lg-4">
@@ -20,6 +30,9 @@
         @empty
             <p> Még nincsenek bejegyzések! </p>
         @endforelse
+        </div>
+        <div class="text-center my-3">
+            <a href="{{route('new.post')}}" role="button" class="btn btn-primary"> Új Bejegyzés </a>
         </div>
     </div>
 @endsection

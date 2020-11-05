@@ -30,6 +30,10 @@ Route::get('/posts', [PostController::class, 'showAll'])->name('posts');
 
 Route::get('/post/{id}', [PostController::class, 'show'])->name('post');
 
+Route::get('/new-post}', [PostController::class, 'showNewPost'])->name('new.post');
+
+Route::post('/store-post}', [PostController::class, 'storeNewPost'])->name('store.new.post');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
