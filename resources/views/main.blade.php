@@ -9,8 +9,8 @@
             <p class="lead">Ezt a blogot a szerveroldali webprogramoás tárgy keretein belül fejlesztjük.</p>
             <hr class="my-4">
             <ul>
-                <li>Bejegyzések: N/A</li>
-                <li>Felhasználók: N/A</li>
+                <li>Bejegyzések: {{ $post_count }}</li>
+                <li>Felhasználók: {{ $user_count }}</li>
             </ul>
             <a class="btn btn-primary btn-lg" href="{{route('posts')}}" role="button">Bejegyzések megtekintése</a>
             </p>

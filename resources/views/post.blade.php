@@ -3,6 +3,18 @@
 @section('title', 'Adott bejegyzes')
 
 @section('content')
-    egy adott bejegyzes {{$id}}
+    <div class="container">
+        @if ($post === null)
+            <div class="alert alert-danger" role="alert">
+                Nem található ilyen bejegyzés!
+            </div>
+        @else
+            <h1>{{ $post->title }}</h1>
+            <p>Szerző: {{ $post->author }}</p>
+            <img src="{{ Storage::url(substr($post->image_url, strlen('storage/app/'))) }}" alt="">
+            <p> {{ $post->text }}</p>
+
+        @endif
+    </div>
 @endsection
 

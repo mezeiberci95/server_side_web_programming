@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostFormRequest;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -9,7 +11,7 @@ class PostController extends Controller
     //
     public function showAll() {
 
-        $posts = [
+        /*$posts = [
             [
                 'id' => 1,
                 'title' => 'Cim1',
@@ -28,24 +30,30 @@ class PostController extends Controller
                 'author' => 'David',
                 'text' => 'Bejegyzes szovege',
             ]
-            ];
+            ];*/
+            $posts = Post::all();
 
-        return view('posts', ['posts' => $posts]); //ezt a viewt létre kell hozni
+        return view('posts', compact('posts')); //ezt a viewt létre kell hozni
     }
 
     public function show($id) {
-        return view('post', ['id' => $id]); //ezt a viewt létre kell hozni, megkapja az id változót
+        $post = Post::find($id);
+        return view('post', compact('post')); //ezt a viewt létre kell hozni, megkapja az id változót
     }
 
     public function showNewPost() {
         return view('new-post');
     }
 
-    public function storeNewPost(Request $request) {
-        $data = $request->validate([
+    public function storeNewPost(PostFormRequest $request) {
+        /*$data = $request->validate([
             'title' => 'required|min:3',
             'text' => 'required|min:12',
-        ]);
+        ]);*/
+
+        $data['author'] = 'David';
+
+        $post = Post::create($data);
         return redirect()->route('posts')->with('post_added', true);
     }
 }
