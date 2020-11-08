@@ -50,6 +50,7 @@ class PostController extends Controller
             'title' => 'required|min:3',
             'text' => 'required|min:12',
         ]);*/
+        $data = $request->all();
 
         $data['author'] = 'David';
 

@@ -11,7 +11,7 @@
         @else
             <h1>{{ $post->title }}</h1>
             <p>Szerző: {{ $post->author }}</p>
-            <img src="{{ Storage::url(substr($post->image_url, strlen('storage/app/'))) }}" alt="">
+            <img src="{{  Storage::url('images/post_images/' . $post->image_url) }}">
             <p> {{ $post->text }}</p>
 
         @endif
