@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,8 @@ Route::get('/post/{id}', [PostController::class, 'show'])->name('post');
 Route::get('/new-post}', [PostController::class, 'showNewPost'])->name('new.post');
 
 Route::post('/store-post}', [PostController::class, 'storeNewPost'])->name('store.new.post');
+
+Route::get('/tag/{id}', [TagController::class, 'show'])->name('tag');
 
 Auth::routes();
 

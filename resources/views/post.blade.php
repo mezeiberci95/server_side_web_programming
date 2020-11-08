@@ -10,8 +10,16 @@
             </div>
         @else
             <h1>{{ $post->title }}</h1>
-            <p>Szerző: {{ $post->author }}</p>
+            <p class="mb-0">Szerző: {{ $post->author }}</p>
+            <div class="mb-2">
+                @foreach ($post->tags as $tag)
+                    <span class="badge badge-dark"><a href="{{ route('tag', ['id' => $tag->id]) }}"> {{$tag->text}} </a> </span>
+                @endforeach
+            </div>
+            @if ($post->image_url !== null)
             <img src="{{  Storage::url('images/post_images/' . $post->image_url) }}">
+            @endif
+
             <p> {{ $post->text }}</p>
 
         @endif
