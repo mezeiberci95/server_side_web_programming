@@ -38,6 +38,19 @@
                 </div>
             </div>
 
+            <h6> Tagek </h6>
+            @forelse ($tags as $tag)
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" id="tag{{ $loop->iteration }}" name="tags[]">
+                    <label class="form-check-label" for="tag{{ $loop->iteration }}">
+                        {{ $tag->text }}
+                    </label>
+                </div>
+            @empty
+                <p> Nincsenek tag-ek </p>
+            @endforelse
+
+
             <div class="row my-2">
                 <label for="image" class="col-sm-2"> Kép</label>
                 <div class="col-sm-10">

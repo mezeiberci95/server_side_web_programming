@@ -31,9 +31,9 @@ Route::get('/posts', [PostController::class, 'showAll'])->name('posts');
 
 Route::get('/post/{id}', [PostController::class, 'show'])->name('post');
 
-Route::get('/new-post}', [PostController::class, 'showNewPost'])->name('new.post');
+Route::get('/new-post}', [PostController::class, 'showNewPost'])->name('new.post')->middleware('auth');
 
-Route::post('/store-post}', [PostController::class, 'storeNewPost'])->name('store.new.post');
+Route::post('/store-post}', [PostController::class, 'storeNewPost'])->name('store.new.post')->middleware('auth');
 
 Route::get('/tag/{id}', [TagController::class, 'show'])->name('tag');
 

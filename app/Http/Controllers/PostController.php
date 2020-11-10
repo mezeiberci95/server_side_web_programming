@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostFormRequest;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Storage;
+use Auth;
 
 
 class PostController extends Controller
@@ -44,7 +46,8 @@ class PostController extends Controller
     }
 
     public function showNewPost() {
-        return view('new-post');
+        $tags = Tag::all();
+        return view('new-post', compact('tags'));
     }
 
     public function storeNewPost(PostFormRequest $request) {
@@ -61,9 +64,11 @@ class PostController extends Controller
             $data['image_url'] = $hashName;
         }
 
-        $data['author'] = 'David';
+        //data['author'] = 'Bertalan';
+        $data['user_id'] = Auth::id();
 
         $post = Post::create($data);
+        $post->tags()->attach($data['tags']);
         return redirect()->route('posts')->with('post_added', true);
     }
 }

@@ -25,7 +25,7 @@ class PostFactory extends Factory
     {
         return [
             'title' => $this->faker->words(3, true),
-            'author' => $this->faker->name(),
+            //'author' => $this->faker->name(),
             'image_url' => $this->faker->image(Storage::path('public') . '/images/post_images', 400, 400, 'dogs', false),
             'text' => $this->faker->paragraph(10, true),
             //

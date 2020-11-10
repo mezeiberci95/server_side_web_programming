@@ -16,10 +16,12 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title'); //bejegyzes cime
-            $table->string('author');
+            //$table->string('author');
+            $table->unsignedBigInteger('user_id');
             $table->text('text'); //bejegyzes szovege
             $table->string('image_url')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

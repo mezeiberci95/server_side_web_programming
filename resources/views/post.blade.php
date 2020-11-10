@@ -10,10 +10,10 @@
             </div>
         @else
             <h1>{{ $post->title }}</h1>
-            <p class="mb-0">Szerző: {{ $post->author }}</p>
+            <p class="mb-0">Szerző: {{ $post->user->name }}</p>
             <div class="mb-2">
                 @foreach ($post->tags as $tag)
-                    <span class="badge badge-dark"><a href="{{ route('tag', ['id' => $tag->id]) }}"> {{$tag->text}} </a> </span>
+                    <span style="background-color: {{ $tag->color }}!important;" class="badge badge-dark"><a style="color: white !important;" href="{{ route('tag', ['id' => $tag->id]) }}"> {{$tag->text}} </a> </span>
                 @endforeach
             </div>
             @if ($post->image_url !== null)

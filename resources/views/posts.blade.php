@@ -21,7 +21,7 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                   <h5 class="card-title">{{$post->title}}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Szerző: {{$post->author}}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">Szerző: {{$post->user->name}}</h6>
                   <p class="card-text">{{ $post->text }}</p>
                   <a href="{{ route('post', ['id' => $post->id]) }}" class="card-link">Bejegyzés megtekintése</a>
                 </div>
