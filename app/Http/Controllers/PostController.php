@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostFormRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Storage;
+
 
 class PostController extends Controller
 {
@@ -51,6 +53,13 @@ class PostController extends Controller
             'text' => 'required|min:12',
         ]);*/
         $data = $request->all();
+
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $hashName = $file->hashName();
+            Storage::disk('public')->put('images/post_images/'.$hashName, file_get_contents($file));
+            $data['image_url'] = $hashName;
+        }
 
         $data['author'] = 'David';
 

@@ -17,7 +17,7 @@
                 @endforeach
             </div>
             @if ($post->image_url !== null)
-            <img src="{{  Storage::url('images/post_images/' . $post->image_url) }}">
+            <img class="img-fluid" src="{{  Storage::url('images/post_images/' . $post->image_url) }}">
             @endif
 
             <p> {{ $post->text }}</p>
