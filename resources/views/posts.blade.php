@@ -14,6 +14,12 @@
             @endif
         @endif
 
+        @if (session()->has('post_deleted'))
+            <div class="alert alert-success mb-3" role="alert">
+                Sikeresen törölted ezt a bejegyzéést: {{ session()->get('post_deleted') }}
+            </div>
+        @endif
+
 
         <div class="row">
             @forelse ($posts as $post)

@@ -42,8 +42,47 @@ class PostController extends Controller
 
     public function show($id) {
         $post = Post::find($id);
-        return view('post', compact('post')); //ezt a viewt létre kell hozni, megkapja az id változót
+        return view('post', compact('post'));
     }
+
+    public function delete($id) {
+        $post = Post::find($id);
+        if($post === null) {
+            return redirect()->route('posts');
+        }
+        $title = $post->title;
+        $post->delete();
+        return redirect()->route('posts')->with('post_deleted', $title);
+    }
+
+    public function edit($id) {
+        $post = Post::find($id);
+        $tag_ids = [];
+        if($post !== null) {
+            $tag_ids = $post->tags->pluck('id')->toArray();
+        }
+        $tags = Tag::all();
+
+        return view('post-edit', compact('post', 'tags', 'tag_ids'));
+    }
+
+    public function update(PostFormRequest $request, $id) {
+        $data = $request->all();
+
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $hashName = $file->hashName();
+            Storage::disk('public')->put('images/post_images/'.$hashName, file_get_contents($file));
+            $data['image_url'] = $hashName;
+        }
+
+        $post = Post::find($id);
+        $post->update($data);
+        $post->tags()->sync($request->tags);
+        return redirect()->route('posts')->with('post_updated', true);
+    }
+
+
 
     public function showNewPost() {
         $tags = Tag::all();
